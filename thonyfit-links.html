@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>thonyfit | Entrenador Personal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0a;
+      --surface:   #141414;
+      --border:    #2a2a2a;
+      --gold:      #C9A84C;
+      --gold-dim:  #8a6e30;
+      --white:     #f0ede8;
+      --muted:     #888;
+      --radius:    14px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px 60px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 16px;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(var(--gold) 0%, #e05f1b 40%, #c9184a 70%, var(--gold) 100%);
+      z-index: 0;
+    }
+
+    .avatar-inner {
+      position: relative;
+      z-index: 1;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 3px solid var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 38px;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .handle {
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 280px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      width: 100%;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin: 28px 0 10px;
+      padding-left: 4px;
+    }
+
+    /* ── LINK CARD ── */
+    .link-card {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      text-decoration: none;
+      color: var(--white);
+      margin-bottom: 10px;
+      transition: border-color .2s, transform .15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--gold);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .link-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+
+    .link-card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: #1e1e1e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .card-text { flex: 1; }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .card-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .card-arrow {
+      font-size: 16px;
+      color: var(--gold-dim);
+      flex-shrink: 0;
+    }
+
+    /* ── FEATURED (CTA principal) ── */
+    .link-card.featured {
+      background: linear-gradient(135deg, #1a1508 0%, #1e1a0a 100%);
+      border-color: var(--gold-dim);
+    }
+
+    .link-card.featured .card-title { color: var(--gold); }
+
+    /* ── TESTIMONIALS STRIP ── */
+    .testi-card {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 10px;
+    }
+
+    .testi-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .testi-icon {
+      font-size: 22px;
+    }
+
+    .testi-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .testi-title span {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 400;
+      margin-left: 6px;
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .testi-item {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .testi-result {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .testi-desc {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-top: 36px;
+      font-size: 11px;
+      color: #444;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="avatar-wrap">
+      <div class="avatar-ring"></div>
+      <div class="avatar-inner">TF</div>
+    </div>
+    <div class="name">THONYFIT</div>
+    <div class="handle">@thonyfit_ • Entrenador Personal</div>
+    <p class="tagline">Transformo tu cuerpo con planes 1:1 de entrenamiento y nutrición</p>
+  </div>
+
+  <!-- SERVICIOS -->
+  <div class="section-label">Mis servicios</div>
+
+  <a href="https://wa.me/573127509768?text=Hola%20Anthony,%20quiero%20info%20sobre%20la%20Asesor%C3%ADa%201:1" class="link-card featured">
+    <div class="card-icon">🎯</div>
+    <div class="card-text">
+      <div class="card-title">Asesoría 1:1 Personalizada</div>
+      <div class="card-sub">Seguimiento directo conmigo · Escríbeme para empezar</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="https://wa.me/573127509768?text=Hola%20Anthony,%20quiero%20info%20sobre%20el%20Plan%20de%20Entrenamiento" class="link-card">
+    <div class="card-icon">🏋️</div>
+    <div class="card-text">
+      <div class="card-title">Plan de Entrenamiento</div>
+      <div class="card-sub">Rutina diseñada para tu cuerpo y objetivo</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="https://wa.me/573127509768?text=Hola%20Anthony,%20quiero%20info%20sobre%20el%20Plan%20de%20Nutrici%C3%B3n" class="link-card">
+    <div class="card-icon">🥗</div>
+    <div class="card-text">
+      <div class="card-title">Plan de Nutrición</div>
+      <div class="card-sub">Alimentación adaptada a tu estilo de vida</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <!-- RESULTADOS -->
+  <div class="section-label">Resultados reales</div>
+
+  <div class="testi-card">
+    <div class="testi-header">
+      <div class="testi-icon">💪</div>
+      <div class="testi-title">Lo que logran mis clientes <span>— escríbeme y empieza tú también</span></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-item">
+        <div class="testi-result">-8kg</div>
+        <div class="testi-desc">Grasa eliminada en 10 semanas</div>
+      </div>
+      <div class="testi-item">
+        <div class="testi-result">+12kg</div>
+        <div class="testi-desc">Masa muscular ganada en 16 semanas</div>
+      </div>
+      <div class="testi-item">
+        <div class="testi-result">90 días</div>
+        <div class="testi-desc">Transformación física completa</div>
+      </div>
+      <div class="testi-item">
+        <div class="testi-result">1:1</div>
+        <div class="testi-desc">Seguimiento personalizado contigo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACTO / REDES -->
+  <div class="section-label">Contáctame</div>
+
+  <a href="https://wa.me/573127509768?text=Hola%20Anthony,%20vi%20tu%20perfil%20y%20quiero%20empezar" class="link-card">
+    <div class="card-icon">💬</div>
+    <div class="card-text">
+      <div class="card-title">WhatsApp — Escríbeme ya</div>
+      <div class="card-sub">Respondo en menos de 24h</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="https://www.instagram.com/thonyfit_" class="link-card">
+    <div class="card-icon">📸</div>
+    <div class="card-text">
+      <div class="card-title">Instagram @thonyfit_</div>
+      <div class="card-sub">Tips diarios de entreno y nutrición</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <div class="footer">© 2026 thonyfit · Todos los derechos reservados</div>
+
+</div>
+</body>
+</html>
