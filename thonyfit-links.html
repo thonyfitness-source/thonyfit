@@ -59,21 +59,15 @@
       z-index: 0;
     }
 
-    .avatar-inner {
-      position: relative;
-      z-index: 1;
+    .avatar-img {
+      position: absolute;
+      top: 0; left: 0;
       width: 96px;
       height: 96px;
       border-radius: 50%;
-      background: var(--surface);
+      object-fit: cover;
       border: 3px solid var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 38px;
-      color: var(--gold);
-      letter-spacing: 1px;
+      z-index: 2;
     }
 
     .name {
@@ -263,7 +257,7 @@
   <div class="header">
     <div class="avatar-wrap">
       <div class="avatar-ring"></div>
-      <img src="logo.jpeg" style="width:96px;height:96px;border-radius:50%;object-fit:cover;">
+      <img src="logo.jpeg" class="avatar-img" alt="thonyfit">
     </div>
     <div class="name">THONYFIT</div>
     <div class="handle">@thonyfit_ • Entrenador Personal</div>
@@ -340,20 +334,20 @@
     <div class="card-arrow">→</div>
   </a>
 
-  <a href="https://www.tiktok.com/@thonyfit_?_r=1&_t=ZS-97Vr3n7hI2B" class="link-card">
-    <div class="card-icon">🎵</div>
-    <div class="card-text">
-      <div class="card-title">TikTok @thonyfit_</div>
-      <div class="card-sub">TikToks diarios de entreno y nutrición</div>
-    </div>
-    <div class="card-arrow">→</div>
-  </a>
-
   <a href="https://www.instagram.com/thonyfit_" class="link-card">
     <div class="card-icon">📸</div>
     <div class="card-text">
       <div class="card-title">Instagram @thonyfit_</div>
       <div class="card-sub">Tips diarios de entreno y nutrición</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="https://www.tiktok.com/@thonyfit_?_r=1&_t=ZS-97Vr3n7hI2B" class="link-card">
+    <div class="card-icon">🎵</div>
+    <div class="card-text">
+      <div class="card-title">TikTok @thonyfit_</div>
+      <div class="card-sub">TikToks diarios de entreno y nutrición</div>
     </div>
     <div class="card-arrow">→</div>
   </a>
